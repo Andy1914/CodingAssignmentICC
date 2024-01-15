@@ -1,0 +1,15 @@
+<li class="flex p-4 sortable-item" data-reason-ordering="<%= reason.ordering %>" >
+  <%= show_svg('more-vertical.svg') %>
+  <div class="flex grow items-center pl-5">
+    <div class="reason-icon">
+      <%= show_svg(reason.active ? 'eye.svg' : 'eye-off.svg') %>
+    </div>
+    <p class="font-semibold	text-base text-primary pl-4 list_item_text"><%= reason.label %></p>
+  </div>
+  <button type="button" 
+          class="bg-transparent font-semibold text-base text-secondary" 
+          data-action="modal#show" 
+          data-reason-id="<%= reason.ordering %>">
+          Edit
+  </button>
+</li>

@@ -1,0 +1,41 @@
+<div class="nested-form-wrapper hidden" data-reason-ordering="<%= f.object.ordering %>" >
+  <div class="dashboard-form-fields" data-controller="reason">
+    <%=
+      f.input :label,
+        label: 'Displayed reason',
+        required: true,
+        placeholder: 'Enter Displayed reason...',
+        hint: "Provide a friendly description for the reason that will be displayed to the customer.",
+        label_html: { class: 'font-semibold text-base text-primary mb-2' },
+        input_html: { class: 'font-normal text-base text-primary rounded-xl bg-light-gray border border-light-gray', data: { target: 'reason.reasonInput', reason: f.object.ordering  } },
+        hint_html: { class: 'font-normal text-sm text-primary' }
+    %>
+    <%=
+      f.input :code,
+        label: 'Internal return code',
+        required: true,
+        placeholder: 'Enter Internal return code...',
+        hint: "For internal use only. Must be unique. To aid in analytics, we do not recommend changing the code once set.",
+        label_html: { class: 'font-semibold text-base text-primary mb-2' },
+        input_html: { class: 'font-normal text-base text-primary rounded-xl bg-light-gray border-light-gray' },
+        hint_html: { class: 'font-normal text-sm text-primary' }
+    %>
+    <%= f.input :active,
+      label: raw("<span class='pr-2' data-target='reason.icon'></span>" + "<span class='pr-2' data-target='reason.label'></span>"),
+      hint: "When hidden, this return reason is not offered as an option to the customers. Click on the eye icon to make the return reason visible.",
+      label_html: { class: 'font-semibold text-base text-primary items-center flex' },
+      input_html: { class: 'hidden', data: { action: 'change->reason#toggleIcon', "reason-checked-value": f.object.ordering, target: 'reason.reasonCheckbox' }, id: "icon-reason-#{f.object.ordering}" },
+      hint_html: { class: 'font-normal text-sm text-primary' }
+    %>
+
+    <%= f.input :ordering, as: :hidden
+    %>
+
+    <div class="flex justify-between align-center">
+      <button type="button" class="btn bg-white text-danger rounded-lg border-danger border-2 font-bold text-sm" data-action="nested-form#removeAssociation modal#hide">Remove</button>
+      <button type="button" class="btn bg-info rounded-lg	font-bold text-sm" data-action="modal#hide" data-reason-id="<%= f.object.ordering %>">Continue</button>
+    </div>
+    
+    <%= f.hidden_field :_destroy %>
+  </div>
+</div>

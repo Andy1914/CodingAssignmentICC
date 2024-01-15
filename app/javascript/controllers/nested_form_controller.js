@@ -5,12 +5,12 @@ export default class extends Controller {
   static values = { index: String }
 
   addAssociation(event) {
-    console.log('addAssociation')
     event.preventDefault()
-    console.log(this.indexValue);
     const child_index_name = this.indexValue
     const content = this.templateTarget.innerHTML.replace(new RegExp(child_index_name, "g"), new Date().valueOf())
-    this.addItemTarget.insertAdjacentHTML('beforebegin', content)
+    this.addItemTarget.innerHTML = content
+    console.log(this.addItemTarget)
+
   }
 
   removeAssociation(event, isRemoveBundle) {

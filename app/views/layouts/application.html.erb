@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <title>RailsFrontendTest</title>
@@ -11,9 +12,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
+  <body class="bg-slate-200 max-w">
+    <main class="m-0 flex">
+      <div class="w-full md:w-1/4 bg-gray-200 p-4 min-h-screen bg-stone-800">
+      </div>
+      <div class="w-full md:w-3/4 px-6 py-4">
+        <%= yield %>
+      </div>
     </main>
   </body>
+  
 </html>

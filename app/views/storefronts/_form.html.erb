@@ -1,43 +1,35 @@
 <%= simple_form_for storefront, data: { controller: 'nested-form', nested_form_index_value: 'NEW_RECORD' } do |form| %>
-  <% if storefront.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(storefront.errors.count, "error") %> prohibited this storefront from being saved:</h2>
-
-      <ul>
-        <% storefront.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <div
-      class="return-reason-container"
-    >
+  <%= render "shared/form_error", model_data: storefront %>
+  <div data-controller="reason">
+    <%= render "reasons/list", storefront: @storefront do %>
       <template hidden data-nested-form-target="template">
         <%= form.simple_fields_for :reasons, Reason.new, child_index: 'NEW_RECORD' do |reason_fields| %>
-          <%= render 'reason', f: reason_fields %>
+          <%= render 'reasons/reason', f: reason_fields %>
         <% end %>
       </template>
-
-      <button type="button" data-action="nested-form#addAssociation" class="btn">
-        <i class="add-icon"></i> Add Return Reason
+      <button class="font-semibold text-base flex" type="button" data-action="nested-form#addAssociation modal#showEmptyForm" class="btn">
+        <span class='pr-4'><%= show_svg('add.svg') %></span> Add Return Reason
       </button>
-      <%= form.simple_fields_for :reasons, @storefront.reasons.ordered do |reason_fields| %>
-        <%= render 'reason', f: reason_fields %>
-      <% end %>
+    <% end %>
 
-      <div hidden data-nested-form-target="addItem"></div>
-    </div>
+    <%= render "shared/modal" do %>
+      <div id="empty_form" data-nested-form-target="addItem"></div>
+      <div>
+        <div class="return-reasons-container">
+          <%= form.simple_fields_for :reasons, @storefront.reasons.ordered do |reason_fields| %>
+            <%= render "reasons/reason", f: reason_fields %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <div>
+  
+  <div class="flex absolute bottom-0 right-0 h-20 bg-white w-full justify-between items-center p-4 md:w-3/4">
     <div>
-      Remember to save your changes before leaving this page
+      <p class="text-sm text-primary">Remember to save your changes before leaving this page</p>
     </div>
     <div>
-      <%= form.submit 'Save', class: 'btn-primary' %>
+      <%= form.submit 'Save', class: 'btn-primary rounded-lg text-base font-bold bg-info' %>
     </div>
   </div>
 <% end %>

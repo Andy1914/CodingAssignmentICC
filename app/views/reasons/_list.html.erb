@@ -1,0 +1,6 @@
+<ul class="bg-input-neutral-bg border border-light-gray rounded-xl divide-y" data-controller="drag", id="reasons_list">
+  <li class="flex p-4 text-secondary">
+    <%= yield %>
+  </li>
+  <%= render partial: "reasons/list_item", collection: storefront.reasons.ordered, as: :reason %>
+<ul>

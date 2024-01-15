@@ -20,7 +20,7 @@ class StorefrontsController < ApplicationController
   end
 
   # POST /storefronts or /storefronts.json
-  def create
+  def create 
     @storefront = Storefront.new(storefront_params)
 
     respond_to do |format|
